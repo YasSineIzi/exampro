@@ -37,7 +37,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     $_SESSION['user_email'] = $db_email;
                     $_SESSION['user_role'] = $role;
 
-
                     // Rediriger l'utilisateur en fonction de son rôle
                     if ($role == 'admin') {
                         header("Location: Admin");
@@ -65,124 +64,195 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
     header("Location: profil.php");
     exit();
-
 }
-
 ?>
 
 <!DOCTYPE html>
 <html lang="fr">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Connexion - ExamPro</title>
-    <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Font Awesome -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     <style>
-        body {
-            min-height: calc(100vh - 4rem);
-            background-color: rgba(0, 0, 0, 0.3);
-            background-image: url('https://images.unsplash.com/photo-1516979187457-637abb4f9353?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            background-blend-mode: darken;
-            position: relative;
-            animation: fadeIn 2s ease-in-out;
+        :root {
+            --primary-color: #3b82f6;
+            --gradient-start: #3b82f6;
+            --gradient-end: #60a5fa;
         }
 
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-            }
+        body {
+            min-height: 100vh;
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(96, 165, 250, 0.1) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Inter', sans-serif;
+        }
 
-            to {
-                opacity: 1;
-            }
+        .login-container {
+            width: 100%;
+            max-width: 500px;
+            padding: 1rem;
         }
 
         .card {
-            border: none;
-            border-radius: 10px;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            padding: 2.5rem;
         }
 
-        .card:hover {
-
-            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+        .logo-title {
+            font-size: 2.2rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 0.5rem;
         }
 
-        .btn-primary {
-            background: #48c6ef;
-            border: none;
-            transition: background 0.3s ease, transform 0.2s ease;
+        .subtitle {
+            color: #6B7280;
+            font-size: 0.95rem;
+            margin-bottom: 2rem;
         }
 
-        .btn-primary:hover {
-            background: #6f86d6;
-            transform: scale(1.05);
-        }
+        .form-label {
+            font-weight: 500;
+            color: #374151;
+            margin-bottom: 0.5rem;
+        }   
 
-        .text-primary {
-            color: #48c6ef !important;
+        .form-control {
+            border: 2px solid #E5E7EB;
+            border-radius: 0 12px 12px 0;
+            padding: 0.75rem 1rem;
+            font-size: 1rem;
+            transition: all 0.3s ease;
         }
 
         .form-control:focus {
-            border-color: #6f86d6;
-            box-shadow: 0 0 8px rgba(72, 198, 239, 0.5);
+            outline: none;
+            box-shadow: none;
         }
 
-        a.text-decoration-none:hover {
-            color: #6f86d6;
-            text-decoration: underline;
+        .input-group-text {
+            background: transparent;
+            border: 2px solid #E5E7EB;
+            border-right: none;
+            border-radius: 12px 0 0 12px;
+            color: #6B7280;
+            padding: 0.75rem 1rem;
         }
-        .text{
-            color: #3b82f6 /* hover:from-blue-500 hover:to-blue-300 */
 
-           
+        .input-group .form-control {
+            border-left: none;
+        }
+
+        /* New styles for input group focus */
+        .input-group {
+            transition: all 0.3s ease;
+            border-radius: 12px;
+        }
+
+        
+
+        .input-group:focus-within .input-group-text,
+        .input-group:focus-within .form-control {
+            border-color: var(--primary-color);
+        }
+
+        .input-group:focus-within .input-group-text {
+            color: var(--primary-color);
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+            border: none;
+            border-radius: 12px;
+            padding: 0.75rem 1.5rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(59, 130, 246, 0.3);
+            background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+            opacity: 0.9;
+        }
+
+        .btn-primary:focus {
+            outline: none;
+            box-shadow: none;
+        }
+
+        .alert {
+            border-radius: 12px;
+            padding: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+
+        .logo-icon {
+            animation: float 3s ease-in-out infinite;
+            font-size: 2.5rem;
+            background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
     </style>
 </head>
-
 <body>
-    <div class="d-flex justify-content-center align-items-center vh-100">
-        <div class="card shadow-sm p-4" style="width: 100%; max-width: 400px;">
-            <div class="text-center mb-4">
-                <h2 class="text"><i class="fas fa-graduation-cap"></i> ExamPro</h2>
-                <p class="text-muted">Veuillez vous connecter pour accéder à votre compte</p>
+    <div class="login-container">
+        <div class="card">
+            <div class="text-center">
+                <div class="logo-icon">
+                    <i class="fas fa-graduation-cap"></i>
+                </div>
+                <h1 class="logo-title">ExamPro</h1>
+                <p class="subtitle">Veuillez vous connecter pour accéder à votre compte</p>
             </div>
+            
             <form method="POST" action="">
                 <?php if (!empty($error)): ?>
                     <div class="alert alert-danger"><?php echo htmlspecialchars($error); ?></div>
                 <?php endif; ?>
 
-                <div class="mb-3">
+                <div class="mb-4">
                     <label for="email" class="form-label">Adresse Email</label>
                     <div class="input-group">
                         <span class="input-group-text"><i class="fas fa-envelope"></i></span>
-                        <input type="email" class="form-control" id="email" name="email"
-                            placeholder="exemple@domaine.com" required>
+                        <input type="email" class="form-control" id="email" name="email" 
+                               placeholder="exemple@domaine.com" required>
                     </div>
                 </div>
-                <div class="mb-3">
+                
+                <div class="mb-4">
                     <label for="password" class="form-label">Mot de passe</label>
                     <div class="input-group">
                         <span class="input-group-text"><i class="fas fa-lock"></i></span>
-                        <input type="password" class="form-control" id="password" name="password" placeholder="Enter your password"
-                            required>
+                        <input type="password" class="form-control" id="password" name="password" 
+                               placeholder="Entrez votre mot de passe" required>
                     </div>
                 </div>
+
                 <div class="d-grid">
                     <button type="submit" class="btn btn-primary">Connexion</button>
                 </div>
             </form>
         </div>
     </div>
-    <!-- Bootstrap JS -->
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 </body>
-
 </html>

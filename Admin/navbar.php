@@ -4,22 +4,28 @@
                 </div>
                 <ul class="nav flex-column">
                     <li class="nav-item mb-3">
-                        <a href="index.php" class="nav-link text-primary">Accueil</a>
+                        <a href="index.php" class="nav-link"><i class="fas fa-home"></i>
+                        Accueil</a>
                     </li>
                     <li class="nav-item mb-3">
-                        <a href="AjouterÉtudiant.php" class="nav-link">Ajouter un Étudiant</a>
+                        <a href="AjouterÉtudiant.php" class="nav-link"> <i class="fas fa-user-plus"></i>
+                        Ajouter un Étudiant</a>
                     </li>
                     <li class="nav-item mb-3">
-                        <a href="Gestionutilisateurs.php" class="nav-link">Gestion des utilisateurs</a>
+                        <a href="Gestionutilisateurs.php" class="nav-link"> <i class="fas fa-users-cog"></i>
+                         Gestion des utilisateurs</a>
                     </li>
                     <li class="nav-item mb-3">
-                        <a href="Gestiondesclass.php" class="nav-link">Gestion des classes</a>
+                        <a href="Gestiondesclass.php" class="nav-link"><i class="fas fa-chalkboard-teacher"></i>
+                        Gestion des classes</a>
                     </li>
                     <li class="nav-item mb-3">
-                        <a href="ajoutercourse.php" class="nav-link">Ajouter cours</a>
+                        <a href="ajoutercourse.php" class="nav-link"><i class="fas fa-book-open"></i>
+                        Ajouter cours</a>
                     </li>
                     <li class="nav-item">
-                        <a href="../login.php" class="nav-link text-danger">Déconnexion</a>
+                        <a href="../login.php" class="nav-link text-danger"> <i class="fas fa-sign-out-alt"></i>
+                        Déconnexion</a>
                     </li>
                 </ul>
             </nav>
