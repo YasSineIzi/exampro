@@ -1,0 +1,233 @@
+:root {
+    --primary-color: #3498db;
+    --secondary-color: #2980b9;
+    --text-color: #333;
+    --bg-color: #f4f6f8;
+    --sidebar-width: 250px;
+    --sidebar-collapsed-width: 70px;
+    --sidebar-bg: #fff;
+    --sidebar-hover: #e0e0e0;
+    --transition-speed: 0.3s;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+}
+
+.wrapper {
+    display: flex;
+    min-height: 100vh;
+}
+
+.sidebar {
+    width: var(--sidebar-width);
+    background-color: var(--sidebar-bg);
+    padding: 20px 0;
+    display: flex;
+    flex-direction: column;
+    border-right: 1px solid #e0e0e0;
+    position: fixed;
+    height: 100vh;
+    overflow-y: auto;
+    transition: width var(--transition-speed) ease;
+}
+
+.sidebar.collapsed {
+    width: var(--sidebar-collapsed-width);
+}
+
+.sidebar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+    margin-bottom: 30px;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+}
+
+.logo i {
+    font-size: 24px;
+    color: var(--primary-color);
+    margin-right: 10px;
+}
+
+.logo-text {
+    font-size: 20px;
+    font-weight: bold;
+    color: var(--primary-color);
+    transition: opacity var(--transition-speed) ease;
+}
+
+.sidebar.collapsed .logo-text {
+    opacity: 0;
+    width: 0;
+    overflow: hidden;
+}
+
+.nav-links {
+    list-style-type: none;
+    padding: 0;
+}
+
+.nav-links li {
+    margin-bottom: 10px;
+}
+
+.nav-links a, .logout a {
+    display: flex;
+    align-items: center;
+    padding: 10px 20px;
+    text-decoration: none;
+    color: var(--text-color);
+    transition: background-color 0.3s ease;
+}
+
+.nav-links a:hover, .logout a:hover {
+    background-color: var(--sidebar-hover);
+}
+
+.nav-links a.active {
+    background-color: var(--sidebar-hover);
+    font-weight: bold;
+}
+
+.nav-links i, .logout i {
+    font-size: 18px;
+    margin-right: 10px;
+    width: 20px;
+    text-align: center;
+}
+
+.link-text {
+    transition: opacity var(--transition-speed) ease;
+}
+
+.sidebar.collapsed .link-text {
+    opacity: 0;
+    width: 0;
+    overflow: hidden;
+}
+
+.logout {
+    margin-top: auto;
+    border-top: 1px solid #e0e0e0;
+    padding-top: 20px;
+}
+
+.logout a {
+    color: #e74c3c;
+}
+
+.content {
+    flex-grow: 1;
+    margin-left: var(--sidebar-width);
+    padding: 20px;
+    transition: margin-left var(--transition-speed) ease;
+}
+
+.sidebar.collapsed + .content {
+    margin-left: var(--sidebar-collapsed-width);
+}
+
+.main-content {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+header {
+    margin-bottom: 30px;
+}
+
+h1 {
+    font-size: 24px;
+    color: var(--primary-color);
+}
+
+@media (max-width: 768px) {
+    .wrapper {
+        flex-direction: column;
+    }
+
+    .sidebar {
+        width: 100%;
+        height: auto;
+        position: static;
+        border-right: none;
+        border-bottom: 1px solid #e0e0e0;
+    }
+
+    .sidebar.collapsed {
+        width: 100%;
+    }
+
+    .content {
+        margin-left: 0;
+    }
+
+    .sidebar.collapsed + .content {
+        margin-left: 0;
+    }
+
+    .nav-links {
+        display: flex;
+        justify-content: space-around;
+    }
+
+    .nav-links li {
+        margin-bottom: 0;
+    }
+
+    .nav-links a, .logout a {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        padding: 10px;
+    }
+
+    .nav-links i, .logout i {
+        margin-right: 0;
+        margin-bottom: 5px;
+    }
+
+    .logout {
+        border-top: none;
+        padding-top: 0;
+    }
+
+    .sidebar.collapsed .link-text {
+        opacity: 1;
+        width: auto;
+    }
+}
+
+#sidebarToggle {
+    background: none;
+    border: none;
+    color: var(--primary-color);
+    font-size: 1.25rem;
+    cursor: pointer;
+    padding: 0;
+}
+
+#sidebarToggle:focus {
+    outline: none;
+}
+
+.sidebar.collapsed #sidebarToggle {
+    transform: rotate(180deg);
+}
+
+#sidebarToggle i {
+    transition: transform var(--transition-speed) ease;
+}
+
+.sidebar.collapsed #sidebarToggle i {
+    transform: rotate(180deg);
+}
+
